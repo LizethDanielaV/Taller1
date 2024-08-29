@@ -50,3 +50,40 @@ linkAsignaturas.addEventListener("click", function(event) {
 event.preventDefault();
 contenedorAsignaturas.classList.add("active"); contenedorEstudiantes.classList.remove("active");
 });
+
+
+function agregarFila(tabla, id, nombre) {
+
+    var row = tabla.insertRow();  // Corregido: falta el '='
+    var cellId = row.insertCell(0);  // Corregido: espacio incorrecto antes de 'insertCell'
+    var cellNombre = row.insertCell(1);  // Corregido: espacio incorrecto antes de 'insertCell'
+    var cellAcciones = row.insertCell(2);  // Corregido: espacio incorrecto antes de 'insertCell'
+
+    cellId.textContent = id;
+    cellNombre.textContent = nombre;
+    cellAcciones.innerHTML = '<button class="btn-editar">Editar</button> <button class="btn-eliminar">Eliminar</button>';
+}
+
+var tablaEstudiantes = document.querySelector("#contenedorEstudiantes table tbody");  // Corregido: falta el '='
+var btnAgregarEstudiante = document.getElementById("agregarEstudiante");
+if (btnAgregarEstudiante) {
+    btnAgregarEstudiante.addEventListener("click", function() {
+        var id = tablaEstudiantes.rows.length + 1;  // Corregido: falta el '='
+        var nombre = prompt("Ingrese el nombre del estudiante:");
+        if (nombre) {
+            agregarFila(tablaEstudiantes, id, nombre);
+        } 
+    });
+}
+
+var tablaAsignaturas = document.querySelector("#contenedorAsignaturas table tbody");  // Corregido: falta el '='
+var btnAgregarAsignatura = document.getElementById("agregarAsignatura"); 
+if (btnAgregarAsignatura) {
+    btnAgregarAsignatura.addEventListener("click", function() { 
+        var id = tablaAsignaturas.rows.length + 1;  // Corregido: falta el '='
+        var nombre = prompt("Ingrese el nombre de la asignatura:");  // Corregido: falta el '='
+        if (nombre) {
+            agregarFila(tablaAsignaturas, id, nombre);
+        }
+    });
+}
